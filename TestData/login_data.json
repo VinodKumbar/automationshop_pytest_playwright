@@ -1,0 +1,22 @@
+{
+  "valid_users": [
+    {
+      "username": "vinod",
+      "password": "vinod123"
+    },
+    {
+      "username": "john",
+      "password": "wick123"
+    },
+    {
+      "username": "bruce",
+      "password": "wayne123"
+    }
+  ],
+  "invalid_users": [
+    {
+      "username": "wrong",
+      "password": "wrong123"
+    }
+  ]
+}

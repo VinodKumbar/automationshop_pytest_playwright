@@ -1,0 +1,122 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    ALLURE REPORT - QUICK REFERENCE CARD                     ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+┌─ YOUR MAIN COMMAND ─────────────────────────────────────────────────────────┐
+│                                                                              │
+│  run_clear_and_view_allure.bat                                              │
+│                                                                              │
+│  ✓ Double-click the file                                                   │
+│  OR                                                                          │
+│  ✓ Run: run_clear_and_view_allure.bat                                      │
+│  OR                                                                          │
+│  ✓ PowerShell: .\run_clear_and_view_allure.ps1                             │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ WHAT IT DOES ──────────────────────────────────────────────────────────────┐
+│                                                                              │
+│  Step 1: Clears old allure-results/                                        │
+│  Step 2: Runs pytest Tests/test_login.py -v --alluredir=reports/allure...  │
+│  Step 3: Opens allure serve reports/allure-results                         │
+│                                                                              │
+│  Result: Browser opens with interactive Allure report                      │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ ALTERNATIVE COMMANDS ──────────────────────────────────────────────────────┐
+│                                                                              │
+│  Run tests WITHOUT clearing old reports:                                   │
+│  python -m pytest Tests/test_login.py -v --alluredir=reports/allure...    │
+│                                                                              │
+│  Run ONLY valid login tests (3 users):                                     │
+│  python -m pytest Tests/test_login.py -v -m valid_login --alluredir=...  │
+│                                                                              │
+│  Run ONLY invalid login tests:                                             │
+│  python -m pytest Tests/test_login.py -v -m invalid_login --alluredir=...│
+│                                                                              │
+│  View existing report (no test run):                                       │
+│  allure serve reports/allure-results                                       │
+│                                                                              │
+│  View HTML report:                                                         │
+│  start reports/report.html                                                 │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ ALLURE REPORT FEATURES ────────────────────────────────────────────────────┐
+│                                                                              │
+│  Dashboard                    Timeline                   Graphs            │
+│  ├─ Total Tests: 4           ├─ Test execution order     ├─ Pass/Fail %    │
+│  ├─ Passed: 3-4              ├─ Step-by-step timing      ├─ Duration view  │
+│  ├─ Failed: 0-1              └─ Visual flow              └─ Trends         │
+│  └─ Duration                                                                │
+│                                                                              │
+│  Tests Tab                    Suites Tab                 Details           │
+│  ├─ Test list                ├─ By Feature (Login)       ├─ Screenshots    │
+│  ├─ Individual status        ├─ By Story                 ├─ Error messages │
+│  └─ Detailed view            └─ Categorized results      └─ Step logs      │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ TEST EXECUTION DETAILS ────────────────────────────────────────────────────┐
+│                                                                              │
+│  Total Tests: 4                                                             │
+│                                                                              │
+│  1. test_valid_login[user0] - vinod/vinod123           ✓ PASSED            │
+│  2. test_valid_login[user1] - john/wick123            ✓ PASSED            │
+│  3. test_valid_login[user2] - bruce/wayne123          ✓ PASSED            │
+│  4. test_invalid_login[user0] - wrong/wrong123        ✓ PASSED            │
+│                                                                              │
+│  Duration: ~67 seconds                                                     │
+│  Features: Login (Valid & Invalid User Login)                              │
+│  Severity: CRITICAL                                                        │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ TEST STEPS CAPTURED IN REPORT ─────────────────────────────────────────────┐
+│                                                                              │
+│  Valid Login:                              Invalid Login:                  │
+│  1. Navigate to application          1. Navigate to application          │
+│  2. Login with credentials           2. Attempt login (invalid creds)     │
+│  3. Verify products page loaded      3. Wait for error message           │
+│  4. Logout from application          4. Verify error displayed           │
+│                                      5. Capture error screenshot          │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ TROUBLESHOOTING ───────────────────────────────────────────────────────────┐
+│                                                                              │
+│  Issue: "allure command not found"                                         │
+│  → Fix: npm install -g allure-commandline                                  │
+│                                                                              │
+│  Issue: "Port 4040 already in use"                                         │
+│  → Fix: Allure auto-finds next port. Check console for actual URL.        │
+│                                                                              │
+│  Issue: Scripts won't run                                                  │
+│  → Fix: Run Command Prompt/PowerShell as ADMINISTRATOR                    │
+│                                                                              │
+│  Issue: No screenshots in report                                           │
+│  → Fix: Tests must fail to capture screenshots. Check screenshots/ folder │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ FILE LOCATIONS ────────────────────────────────────────────────────────────┐
+│                                                                              │
+│  Tests:          Tests/test_login.py                                       │
+│  Test Data:      TestData/login_data.json                                  │
+│  Allure Report:  reports/allure-results/                                   │
+│  Screenshots:    screenshots/                                              │
+│  HTML Report:    reports/report.html                                       │
+│  Scripts:        run_clear_and_view_allure.bat (.ps1)                      │
+│  Docs:           README.md, ALLURE_SETUP.md, QUICK_COMMANDS.md             │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║  🚀 READY TO GO!                                                           ║
+║                                                                            ║
+║  Just run: run_clear_and_view_allure.bat                                  ║
+║                                                                            ║
+║  That's it! 🎉                                                             ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
