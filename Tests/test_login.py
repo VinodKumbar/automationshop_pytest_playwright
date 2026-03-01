@@ -3,15 +3,11 @@ import pytest
 from playwright.sync_api import expect
 
 from Pages.login_page import LoginPage
-
-try:
-    import allure
-    ALLURE_AVAILABLE = True
-except ImportError:
-    ALLURE_AVAILABLE = False
+from utils.reporting import step, set_test_info, attach_text, capture_screenshot
 
 
 def load_test_data():
+    """Load test data from JSON file"""
     with open("TestData/login_data.json") as f:
         return json.load(f)
 
@@ -22,43 +18,45 @@ valid_users = test_data["valid_users"]
 invalid_users = test_data["invalid_users"]
 
 
+def perform_login(login_page, username, password):
+    """Helper function to perform login with steps"""
+    with step("Navigate to application"):
+        login_page.navigate()
+
+    with step(f"Login with username: {username}"):
+        login_page.login(username, password)
+
+
+def verify_error_message(page, username):
+    """Helper function to verify and capture error message"""
+    error_locator = page.locator("#errorModal > div > p")
+
+    # Verify error is visible and contains expected text
+    expect(error_locator).to_be_visible()
+    expect(error_locator).to_contain_text("Invalid")
+
+    # Capture error message and screenshot
+    if error_locator.count() > 0:
+        error_message = error_locator.inner_text()
+        print(f"Error message: {error_message}")
+        attach_text(error_message, "Error Message")
+
+    capture_screenshot(page, f"screenshots/error_message_{username}.png", "Error Screenshot")
+
+
 @pytest.mark.valid_login
 @pytest.mark.parametrize("user", valid_users)
 def test_valid_login(page, user):
     """Test valid user login and logout"""
-    if ALLURE_AVAILABLE:
-        allure.dynamic.feature("Login")
-        allure.dynamic.story("Valid User Login")
-        allure.dynamic.severity(allure.severity_level.CRITICAL)
+    set_test_info("Login", "Valid User Login", "CRITICAL")
 
     login_page = LoginPage(page)
+    perform_login(login_page, user["username"], user["password"])
 
-    # Step 1: Navigate to login page
-    if ALLURE_AVAILABLE:
-        with allure.step(f"Navigate to application"):
-            login_page.navigate()
-    else:
-        login_page.navigate()
-
-    # Step 2: Login with valid credentials
-    if ALLURE_AVAILABLE:
-        with allure.step(f"Login with username: {user['username']}"):
-            login_page.login(user["username"], user["password"])
-    else:
-        login_page.login(user["username"], user["password"])
-
-    # Step 3: Verify user is logged in
-    if ALLURE_AVAILABLE:
-        with allure.step("Verify user is redirected to products page"):
-            assert "products" in page.url, "User should be redirected to products page"
-    else:
+    with step("Verify successful login"):
         assert "products" in page.url, "User should be redirected to products page"
 
-    # Step 4: Logout
-    if ALLURE_AVAILABLE:
-        with allure.step("Logout from application"):
-            login_page.logout()
-    else:
+    with step("Logout"):
         login_page.logout()
 
 
@@ -66,64 +64,16 @@ def test_valid_login(page, user):
 @pytest.mark.parametrize("user", invalid_users)
 def test_invalid_login(page, user):
     """Test invalid user login with error message validation"""
-    if ALLURE_AVAILABLE:
-        allure.dynamic.feature("Login")
-        allure.dynamic.story("Invalid User Login")
-        allure.dynamic.severity(allure.severity_level.CRITICAL)
+    set_test_info("Login", "Invalid User Login", "CRITICAL")
 
     login_page = LoginPage(page)
+    perform_login(login_page, user["username"], user["password"])
 
-    # Step 1: Navigate to login page
-    if ALLURE_AVAILABLE:
-        with allure.step("Navigate to application"):
-            login_page.navigate()
-    else:
-        login_page.navigate()
-
-    # Step 2: Attempt login with invalid credentials
-    if ALLURE_AVAILABLE:
-        with allure.step(f"Attempt login with invalid credentials - username: {user['username']}"):
-            login_page.login(user["username"], user["password"])
-    else:
-        login_page.login(user["username"], user["password"])
-
-    # Step 3: Wait for error message
-    if ALLURE_AVAILABLE:
-        with allure.step("Wait for error message to appear"):
-            page.wait_for_timeout(2000)
-    else:
+    with step("Wait for error message"):
         page.wait_for_timeout(2000)
 
-    # Step 4: Verify error message
-    if ALLURE_AVAILABLE:
-        with allure.step("Verify error message is displayed"):
-            error_locator = page.locator("#errorModal > div > p")
-            if error_locator.count() > 0:
-                error_message = error_locator.inner_text()
-                print(f"Error message: {error_message}")
-                allure.attach(error_message, name="Error Message", attachment_type=allure.attachment_type.TEXT)
+    with step("Verify error message and capture screenshot"):
+        verify_error_message(page, user["username"])
 
-            expect(error_locator).to_be_visible()
-            expect(error_locator).to_contain_text("Invalid")
-    else:
-        error_locator = page.locator("#errorModal > div > p")
-        if error_locator.count() > 0:
-            error_message = error_locator.inner_text()
-            print(f"Error message: {error_message}")
-
-        expect(error_locator).to_be_visible()
-        expect(error_locator).to_contain_text("Invalid")
-
-    # Step 5: Capture screenshot
-    if ALLURE_AVAILABLE:
-        with allure.step("Capture screenshot of error"):
-            page.screenshot(path=f"screenshots/error_message_{user['username']}.png")
-            allure.attach.file(
-                f"screenshots/error_message_{user['username']}.png",
-                name="Error Message Screenshot",
-                attachment_type=allure.attachment_type.PNG
-            )
-    else:
-        page.screenshot(path=f"screenshots/error_message_{user['username']}.png")
 
 

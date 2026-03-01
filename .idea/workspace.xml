@@ -4,22 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fff57a96-6679-43e8-915c-737eec2abff1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Pages/login_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QUICK_COMMANDS.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QUICK_REFERENCE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RUN_TESTS_AND_VIEW_ALLURE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TestData/login_data.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/test_login.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_clear_and_view_allure.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_clear_and_view_allure.ps1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_tests_with_allure.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view_allure_report.bat" afterDir="false" />
+    <list default="true" id="fff57a96-6679-43e8-915c-737eec2abff1" name="Changes" comment="login test with 3 vali user and 1 invalid user">
+      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/reporting.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QUICK_COMMANDS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QUICK_REFERENCE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RUN_TESTS_AND_VIEW_ALLURE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/test_login.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/test_login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,12 +122,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1772350260982</updated>
-      <workItem from="1772350263770" duration="4029000" />
+      <workItem from="1772350263770" duration="5452000" />
     </task>
+    <task id="LOCAL-00001" summary="login test with 3 vali user and 1 invalid user">
+      <option name="closed" value="true" />
+      <created>1772354648457</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1772354648459</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="login test with 3 vali user and 1 invalid user" />
+    <option name="LAST_COMMIT_MESSAGE" value="login test with 3 vali user and 1 invalid user" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
